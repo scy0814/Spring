@@ -1,0 +1,21 @@
+package controller.customer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.controller.Controller;
+
+public class CustomerCenterReplyController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String cc_type = request.getParameter("cc_type");
+		String cc_title = request.getParameter("title");
+		String cc_content = request.getParameter("content");
+		
+		return "/jsp/customer/CustomerCenterReply.jsp";
+	}
+}

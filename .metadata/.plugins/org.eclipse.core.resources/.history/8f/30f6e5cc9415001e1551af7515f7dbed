@@ -1,0 +1,19 @@
+package controller.transfer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.user.UserVO;
+import kr.ac.kopo.controller.Controller;
+
+public class AccountTransferController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String accountNum = request.getParameter("accountNum");
+		System.out.println(accountNum);
+		UserVO vo = new UserVO();
+		System.out.println(vo.getName());
+		
+		return "/jsp/transfer/AccountTransfer.jsp";
+	}
+}

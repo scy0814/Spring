@@ -1,0 +1,19 @@
+package controller.reply;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.controller.Controller;
+
+public class ReplyController implements Controller {
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		
+		String cc_no = request.getParameter("cc_no");
+		String id = request.getParameter("id");
+		String content = request.getParameter("content");
+		return null;
+	}
+
+	
+}

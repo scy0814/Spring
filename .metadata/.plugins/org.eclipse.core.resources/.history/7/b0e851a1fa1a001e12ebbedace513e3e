@@ -1,0 +1,5 @@
+package aisw.web;
+
+public class IndexController {
+
+}

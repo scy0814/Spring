@@ -1,0 +1,19 @@
+package biz.customer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class CenterDAO {
+
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	
+	
+	public void insertInquire(CenterVO vo) {
+		
+	}
+
+}

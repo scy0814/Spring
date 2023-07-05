@@ -1,0 +1,85 @@
+package biz.account;
+
+import java.util.Date;
+
+public class AccountVO {
+	private String accountNum;
+	private String id;
+	private String type;
+	private String accountName;
+	private String accountPW;
+	private String balance;
+	private Date a_date;
+	private String name;
+	public AccountVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public AccountVO(String accountNum, String id, String type, String accountName, String accountPW, String balance,
+			Date a_date, String name) {
+		super();
+		this.accountNum = accountNum;
+		this.id = id;
+		this.type = type;
+		this.accountName = accountName;
+		this.accountPW = accountPW;
+		this.balance = balance;
+		this.a_date = a_date;
+		this.name = name;
+	}
+	public String getAccountNum() {
+		return accountNum;
+	}
+	public void setAccountNum(String accountNum) {
+		this.accountNum = accountNum;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	public String getAccountPW() {
+		return accountPW;
+	}
+	public void setAccountPW(String accountPW) {
+		this.accountPW = accountPW;
+	}
+	public String getBalance() {
+		return balance;
+	}
+	public void setBalance(String balance) {
+		this.balance = balance;
+	}
+	public Date getA_date() {
+		return a_date;
+	}
+	public void setA_date(Date a_date) {
+		this.a_date = a_date;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "AccountVO [accountNum=" + accountNum + ", id=" + id + ", type=" + type + ", accountName=" + accountName
+				+ ", accountPW=" + accountPW + ", balance=" + balance + ", a_date=" + a_date + ", name=" + name + "]";
+	}
+	
+	
+}

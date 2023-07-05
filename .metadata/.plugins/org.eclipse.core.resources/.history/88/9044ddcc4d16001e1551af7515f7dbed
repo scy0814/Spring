@@ -1,0 +1,32 @@
+package controller.transfer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.account.AccountDAO;
+import biz.account.AccountVO;
+import kr.ac.kopo.controller.Controller;
+
+public class AccountTransferController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String accountNum = request.getParameter("accountNum");
+		// AccountVO 객체 생성
+				AccountVO accountVO = new AccountVO();
+				
+				// AccountDAO 객체 생성
+				AccountDAO accountDAO = new AccountDAO();
+				
+				// accountNum을 설정하여 AccountVO 객체에 저장
+				accountVO.setAccountNum(accountNum);
+				
+				// accountNum으로 계좌 정보 조회
+				AccountVO account = accountDAO.getAccountByAccountNum(accountNum);
+				System.out.println(account);
+				
+				// 조회된 계좌 정보를 JSP 페이지로 전달하기 위해 request 속성에 저장
+				request.setAttribute("account", account);
+				
+				return "/jsp/transfer/AccountTransfer.jsp";
+	}
+}

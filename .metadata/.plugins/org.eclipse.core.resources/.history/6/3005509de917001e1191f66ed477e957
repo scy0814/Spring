@@ -1,0 +1,51 @@
+package biz.reply;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import biz.common.JDBCUtil;
+
+public class ReplyDAO {
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	private static String REPLY_INSERT = "insert into cc_reply (cr_no, id, cc_no, cr_content, cr_date) values "
+			+ "((select nvl(max(to_number(cr_no)),0)+1 from cc_reply), ?, ?, ?, ? )";
+	private static String REPLY_LIST = "select * from cc_reply where cc_no = ? order by LPAD(cc_no,2,'0') desc";
+	
+	
+	
+	public void insertReply(ReplyVO vo) {
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(REPLY_INSERT);
+			stmt.setString(1, vo.getId());
+			stmt.setString(2, vo.getCc_no());
+			stmt.setString(3, vo.getCr_content());
+			stmt.setTimestamp(4, vo.getCr_date());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+	public List<ReplyVO> getReplyList(ReplyVO replyVO) {
+		List<ReplyVO> replyList = new ArrayList<ReplyVO>();
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(REPLY_LIST);
+			stmt.setString(1, replyVO.getCc_no());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

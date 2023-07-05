@@ -1,0 +1,12 @@
+package controller.notice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class NoticeCommentController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		
+		return null;
+	}
+}

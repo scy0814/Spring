@@ -1,0 +1,39 @@
+package biz.comment;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import biz.common.JDBCUtil;
+
+public class CommentDAO {
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	private static String COMMENT_LIST = "select * from notice_comments";
+	
+	public List<CommentVO> getCommentList(CommentVO commentVO) {
+		List<CommentVO> commentList = new ArrayList<CommentVO>();
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(COMMENT_LIST);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				CommentVO comment = new CommentVO();
+				comment.setNc_no("nc_no");
+				comment.setNc_no(rs.getString("nc_no"));
+				comment.setNc_id(rs.getString("nc_id"));
+				comment.setNc_comment(rs.getString("nc_comment"));
+				comment.setNc_date(rs.getDate("nc_date"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+}

@@ -1,0 +1,60 @@
+package biz.transaction;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import biz.common.JDBCUtil;
+
+public class TransactionDAO {
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	private static String TRANSACTION_INSERT = "insert into transaction (accountNum1, accountNum2, t_type, t_amount, t_balance, t_date, t_content, num1_name, num2_name) values " + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static String GET_TRANSACTION_HISTORY = "select * from transaction where accountNum1 = ?";
+	public void insertTransaction(TransactionVO vo) {
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(TRANSACTION_INSERT);
+			stmt.setString(1, vo.getAccountNum1());
+			stmt.setString(2, vo.getAccountNum2());
+			stmt.setString(3, vo.getT_type());
+			stmt.setString(4, vo.getT_amount());
+			stmt.setString(5, vo.getT_balance());
+			stmt.setTimestamp(6, vo.getT_date());
+			stmt.setString(7, vo.getT_content());
+			stmt.setString(8, vo.getNum1_name());
+			stmt.setString(9, vo.getNum2_name());
+			stmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getTransactionHistory(TransactionVO vo) {
+		TransactionVO transaction = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(GET_TRANSACTION_HISTORY);
+			stmt.setString(1,vo.getAccountNum1());
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				transaction = new TransactionVO();
+				transaction.setAccountNum1(rs.getString("accountNum1"));
+				transaction.setAccountNum2(rs.getString("accountNum2"));
+				transaction.setT_type(rs.getString("t_type"));
+				transaction.setT_amount(rs.getString("t_amount"));
+				transaction.setT_balance(rs.getString("t_balance"));
+				transaction.setTimestamp(rs.getTimestamp("t_date"));
+				transaction.setT_content(rs.getString("t_content"));
+				transaction.setNum1_name(rs.getString("num1_name"));
+				transaction.setNum2_name(rs.getString("num2_name"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}

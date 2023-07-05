@@ -1,0 +1,22 @@
+package biz.transaction;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class TransactionDAO {
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	private static String ACCOUNT_INSERT = "insert into transaction (accountNum1, accountNum2, t_type, t_amount, t_balance, t_date, t_content, num1_name, num2_name) values " + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	public void insertTransaction(TransactionVO vo) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

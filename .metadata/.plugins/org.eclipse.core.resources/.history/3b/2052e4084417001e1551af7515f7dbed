@@ -1,0 +1,18 @@
+package controller.notice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.controller.Controller;
+
+public class DeleteCommentController implements Controller{
+
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+//		String id = request.getParameter("id");
+		String id = request.getParameter("comment.nc_id");
+		System.out.println("id : " + id);
+		System.out.println(id);
+		return "/jsp/notice/DeleteComment.jsp";
+	}
+}

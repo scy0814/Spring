@@ -1,0 +1,19 @@
+package controller.transaction;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.transaction.TransactionVO;
+import kr.ac.kopo.controller.Controller;
+
+public class TransactionHistoryProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String accountNum = request.getParameter("accountNum");
+		
+		TransactionVO vo = new TransactionVO();
+		vo.setAccountNum1(accountNum);
+		
+		return "/jsp/transaction/TransactionHistory.jsp";
+	}
+}

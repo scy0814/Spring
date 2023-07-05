@@ -1,0 +1,29 @@
+package controller.notice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.comment.CommentDAO;
+import biz.comment.CommentVO;
+import kr.ac.kopo.controller.Controller;
+
+public class DeleteNoticeController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String n_no = request.getParameter("n_no");
+		
+		CommentVO vo = new CommentVO();
+		vo.setN_no(n_no);
+		
+		CommentDAO dao = new CommentDAO();
+		dao.deleteNotice(vo);
+		
+		String msg = "공지사항이 정상적으로 삭제되었습니다";
+		 String url = "/CYBank/noticeList.do";
+	        request.setAttribute("msg", msg); 
+	        request.setAttribute("url", url);
+		
+	        return null;
+		
+	}
+}

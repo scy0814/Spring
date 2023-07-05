@@ -1,0 +1,48 @@
+package controller.customer;
+
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.customer.CenterDAO;
+import biz.customer.CenterVO;
+import kr.ac.kopo.controller.Controller;
+
+public class CC_InquireProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		try {
+            request.setCharacterEncoding("UTF-8");
+         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         };
+         
+		Timestamp cc_date = new Timestamp(new Date().getTime());
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String cc_type = request.getParameter("cc_type");
+		String cc_title = request.getParameter("title");
+		String cc_content = request.getParameter("content");
+		
+		CenterVO vo = new CenterVO();
+		vo.setId(id);
+		vo.setCc_type(cc_type);
+		vo.setCc_title(cc_title);
+		vo.setCc_content(cc_content);
+		vo.setCc_date(cc_date);
+		
+		CenterDAO dao = new CenterDAO();
+		dao.insertInquire(vo);
+		
+		String msg = "답변작성이 완료되었습니다";
+		String url = "/CYBank/customerCenter.do";
+	    request.setAttribute("msg", msg); 
+	    request.setAttribute("url", url);
+		
+		return "/index.jsp";
+	}
+}

@@ -1,0 +1,23 @@
+package controller.notice;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.notice.NoticeDAO;
+import biz.notice.NoticeVO;
+import kr.ac.kopo.controller.Controller;
+
+public class NoticeListController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		
+		String n_no = request.getParameter("n_no");
+		NoticeVO vo= new NoticeVO();
+		NoticeDAO dao = new NoticeDAO();
+		List<NoticeVO> noticeList = dao.getNoticeList(vo);
+		request.setAttribute("noticeList", noticeList);
+		return "/jsp/notice/Notice.jsp";
+	}
+}

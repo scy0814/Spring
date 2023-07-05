@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  .myAccount {
+    position: absolute;
+    left: 10px;
+  }
+
+  .myHr {
+    width: 5cm;
+    margin-left: 0;
+  }
+
+  .button {
+    width: 5cm;
+    height: 60px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: lightgray;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0;
+  }
+
+  #button1 {
+    background-color: rgb(44, 62, 80);
+    color: white;
+  }
+
+  .createAccount {
+    margin-top: -200px;
+    left: 500px;
+    top: -300px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .success {
+    color: green;
+  }
+  
+
+  .col-lg-8 {
+  width: 500px;
+  margin-left: 170px;
+  }
+</style>
+<script>
+  function showConfirmation(contextPath) {
+    var accountPW = document.getElementById("accountPW").value;
+    var accountPW2 = document.getElementById("accountPW2").value;
+    var errorElement = document.getElementById("error");
+
+    if (accountPW.length < 4 || accountPW2.length < 4) {
+      errorElement.innerHTML = "계좌 비밀번호는 4자리 이상이어야 합니다.";
+      return false;
+    }
+
+    if (accountPW !== accountPW2) {
+      errorElement.innerHTML = "계좌 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+      document.getElementById("accountPW2").className = "error";
+      return false;
+    } else {
+      errorElement.innerHTML = "";
+      document.getElementById("accountPW2").className = "success";
+    }
+
+    alert("계좌가 성공적으로 개설되었습니다.");
+
+    // Form submission
+    var form = document.getElementById("createAccountForm");
+    form.action = contextPath + "/createAccountProcess.do";
+    form.submit();
+  }
+</script>
+</head>
+<header>
+<jsp:include page="/jsp/include/header.jsp" />
+</header>
+<body>
+<section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="/index.jsp">홈</a></li>
+          <li>계좌</li>
+          <li>계좌 개설</li>
+        </ol>
+        <h2 style="font-size : 35px;">계좌 개설</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="container">
+	<h1 class="MyAccount">계좌 개설</h1>
+	<hr class="myHr" />
+	
+	<form action="${pageContext.request.contextPath}/createAccount.do" method="post">
+    <button type="submit" class="button" id="button1">계좌개설</button>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/transactionHistory.do" method="post">
+    <button type="submit" class="button">입출금 내역조회</button><br>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/openBanking.do" method="post">
+    <button type="submit" class="button">오픈뱅킹</button><br>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/closeAccount.do" method="post">
+    <button type="submit" class="button">계좌해지</button>
+  </form>
+
+<form id="createAccountForm" class="createAccount" method="post">
+  <div class="container">
+      <div class="col-lg-8">
+            <h5 class="card-title">계좌 개설</h5>
+            <div class="form-group">
+              <label for="id">아이디</label>
+              <input type="text" name="id" value="${user.id}" readonly="readonly" disabled class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="accountName">계좌이름</label>
+              <input type="text" name="accountName" placeholder="만드실 계좌의 이름을 적어주세요" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="accountType">상품 선택</label>
+              <select name="accountType" class="form-control">
+                <option value="입출금">입출금</option>
+                <option value="적금">적금</option>
+                <option value="예금">예금</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="accountPW">계좌 비밀번호</label>
+              <input type="password" name="accountPW" id="accountPW" placeholder="4자리" maxlength="4" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="accountPW2">계좌 비밀번호 확인</label>
+              <input type="password" name="accountPW2" id="accountPW2" placeholder="4자리" maxlength="4" required class="form-control">
+            </div>
+            <div id="error"></div>
+            <button type="button" onclick="showConfirmation('${pageContext.request.contextPath}')" class="btn btn-primary">계좌 개설하기</button>
+      </div>
+  </div>
+</form>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</section>
+</body>
+</html>

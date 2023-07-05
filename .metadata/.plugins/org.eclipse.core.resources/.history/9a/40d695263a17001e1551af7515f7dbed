@@ -1,0 +1,5 @@
+package controller.notice;
+
+public class InsertNoticeProcessController {
+
+}

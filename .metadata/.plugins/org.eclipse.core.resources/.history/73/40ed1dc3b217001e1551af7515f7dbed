@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<script>
+    var message = '<%= request.getAttribute("message") %>';
+    if (message) {
+        alert(message); // 경고 창으로 메시지 표시
+    }
+</script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

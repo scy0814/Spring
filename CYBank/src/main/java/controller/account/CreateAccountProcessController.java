@@ -1,0 +1,63 @@
+package controller.account;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import biz.account.AccountDAO;
+import biz.account.AccountVO;
+import biz.user.UserVO;
+import kr.ac.kopo.controller.Controller;
+
+public class CreateAccountProcessController implements Controller {
+    @Override
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+    	
+    	try {
+            request.setCharacterEncoding("UTF-8");
+         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         };
+
+    	
+        HttpSession session = request.getSession();
+        UserVO user = (UserVO) session.getAttribute("user");
+
+        String accountNum = "412" + generateRandomNumber(9);
+        String userId = user.getId();
+        String type = request.getParameter("accountType");
+        String accountName = request.getParameter("accountName");
+        String accountPW = request.getParameter("accountPW");
+        String balance = "0" ;
+        String name = user.getName();
+        Date a_date = new Date();
+        
+        
+        
+        AccountVO vo = new AccountVO();
+        vo.setAccountNum(accountNum);
+        vo.setId(userId);
+        vo.setType(type);
+        vo.setAccountName(accountName);
+        vo.setAccountPW(accountPW);
+        vo.setBalance(balance);
+        vo.setA_date(a_date);
+        vo.setName(name);
+        
+        AccountDAO dao = new AccountDAO();
+        dao.insertAccount(vo);
+        return "/index.jsp";
+    }
+
+    private String generateRandomNumber(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int digit = (int) (Math.random() * 10);
+            sb.append(digit);
+        }
+        return sb.toString();
+    }
+}

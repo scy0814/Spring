@@ -1,0 +1,15 @@
+package biz.transaction;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class TransactionVO {
+
+	private String accountNum1;
+	private String accountNum2;
+	private String t_type;
+	private String t_amount;
+	private String t_balance;
+	private Timestamp t_date;
+	private String t_content;
+}

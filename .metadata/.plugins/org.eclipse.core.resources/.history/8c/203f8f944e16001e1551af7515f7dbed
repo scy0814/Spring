@@ -1,0 +1,36 @@
+package controller.transfer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.account.AccountDAO;
+import biz.account.AccountVO;
+import kr.ac.kopo.controller.Controller;
+
+public class AccountTransferProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String accountNum1 = request.getParameter("accountNum");
+		
+		
+		String accountNum2 = request.getParameter("accountNum2");
+		AccountVO accountVO = new AccountVO();
+		AccountDAO accountDAO = new AccountDAO();
+		accountVO.setAccountNum(accountNum2);
+		
+		AccountVO account = accountDAO.getAccountByAccountNum(accountNum2);
+		System.out.println(account.getName());
+		
+		String t_amount = request.getParameter("amount");
+		String balance = request.getParameter("balance");
+		int amount = Integer.parseInt(t_amount);
+		int currentBalance = Integer.parseInt(balance);
+		int t_balance = amount + currentBalance ;
+		String t_type = "+"; 
+		
+		
+	
+		return "/index.jsp";
+	}
+}
+

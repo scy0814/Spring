@@ -1,0 +1,55 @@
+package controller.transfer;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.account.AccountDAO;
+import biz.account.AccountVO;
+import biz.transaction.TransactionVO;
+import kr.ac.kopo.controller.Controller;
+
+public class AccountTransferProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		try {
+            request.setCharacterEncoding("UTF-8");
+         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         };
+
+		String accountNum1 = request.getParameter("accountNum");
+		String num1_name = request.getParameter("name");
+		String t_content = request.getParameter("content");
+		
+		String accountNum2 = request.getParameter("accountNum2");
+		AccountVO accountVO = new AccountVO();
+		AccountDAO accountDAO = new AccountDAO();
+		accountVO.setAccountNum(accountNum2);
+		AccountVO account = accountDAO.getAccountByAccountNum(accountNum2);
+		System.out.println(accountNum2);
+		System.out.println(account.getName());
+		String t_amount = request.getParameter("amount");
+		String balance = request.getParameter("balance");
+		int amount = Integer.parseInt(t_amount);
+		int currentBalance = Integer.parseInt(balance);
+		int sum_balance = amount + currentBalance ;
+		String t_type = "+"; 
+		Date t_date = new Date();
+		String t_balance = String.valueOf(sum_balance);
+		
+		TransactionVO vo = new TransactionVO();
+		vo.setAccountNum1(accountNum1);
+		vo.setAccountNum2(accountNum2);
+		vo.setT_type(t_type);
+		vo.setT_amount(t_amount);
+		vo.setT_balance(t_balance);
+		vo.setT_content(t_content);
+		vo.setNum1_name(num1_name);
+		vo.setNum2_name(account.getName());
+		return "/index.jsp";
+	}
+}
+

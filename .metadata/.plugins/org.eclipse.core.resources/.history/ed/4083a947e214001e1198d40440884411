@@ -1,0 +1,23 @@
+package controller.notice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.comment.CommentVO;
+import kr.ac.kopo.controller.Controller;
+
+public class NoticeCommentController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String nc_id = request.getParameter("id");
+		String nc_comment = request.getParameter("comment");
+		System.out.println(nc_id);
+		System.out.println(nc_comment);
+		CommentVO vo = new CommentVO();
+		
+		
+		
+		
+		return "/jsp/notice/NoticeComment.jsp";
+	}
+}

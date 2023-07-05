@@ -1,0 +1,25 @@
+package kr.ac.kopo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class SignUpProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String name = request.getParameter("name");
+		String birthNo = request.getParameter("birthNo");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String phoneNo = request.getParameter("phoneNo");
+		String address = request.getParameter("address");
+		int agree = Integer.ParseInt(request.getParameter("agree"));
+		System.out.println(name + " : " + birthNo + " : " + id + " : " + password + " : " + email + " : " + phoneNo + " : " + address);
+		
+		
+		
+		
+		
+		return "/jsp/login/SignUpProcess.jsp";
+	}
+}

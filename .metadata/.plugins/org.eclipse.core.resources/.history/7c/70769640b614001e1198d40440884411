@@ -1,0 +1,20 @@
+package biz.comment;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+public class CommentDAO {
+	private Connection conn;
+	private PreparedStatement stmt;
+	private ResultSet rs;
+	
+	private static String COMMENT_LIST = "select * from notice_comments";
+	
+	public List<CommentVO> getCommentList(CommentVO commentVO) {
+		return null;
+	}
+	
+	
+}

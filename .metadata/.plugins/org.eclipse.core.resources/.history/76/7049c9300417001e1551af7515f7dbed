@@ -1,0 +1,17 @@
+package biz.customer;
+
+import java.sql.Timestamp;
+
+public class CenterVO {
+	private String cc_no;
+	private String id;
+	private String cc_type;
+	private String cc_title;
+	private String cc_content;
+	private Timestamp cc_date;
+	private int cc_check;
+	
+	
+	
+	
+}

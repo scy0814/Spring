@@ -1,0 +1,38 @@
+package controller.notice;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.comment.CommentDAO;
+import biz.comment.CommentVO;
+import kr.ac.kopo.controller.Controller;
+
+public class NoticeCommentController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+            request.setCharacterEncoding("UTF-8");
+         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         };
+        
+		String nc_id = request.getParameter("id");
+		String nc_comment = request.getParameter("comment");
+		Date nc_date = new Date();
+		
+		CommentVO vo = new CommentVO();
+		
+		vo.setNc_id(nc_id);
+		vo.setNc_comment(nc_comment);
+		vo.setNc_date(nc_date);
+		
+		CommentDAO dao = new CommentDAO();
+		dao.insertComment(vo);
+	//	return "/jsp/notice/GetNotice.jsp";
+		return "redirect:/getNotice.do?n_no=1";
+	}
+}

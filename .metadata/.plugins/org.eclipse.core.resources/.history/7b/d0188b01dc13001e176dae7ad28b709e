@@ -1,0 +1,12 @@
+package biz.notice;
+
+import java.util.List;
+
+public class NoticeDAO {
+
+	public List<NoticeVO> getNoticeList(NoticeVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<header>
+<jsp:include page="/jsp/include/header.jsp" />
+</header>
+<body>
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="/index.jsp">홈</a></li>
+      <li>고객센터</li>
+      <li>문의</li>
+    </ol>
+    <h2 style="font-size: 35px;">문의</h2>
+  </div>
+</section><!-- End Breadcrumbs -->
+  <section class="inner-page">
+    <div class="container">
+    
+    <table class="table table-bordered">
+        <tr>
+          <td>번호</td>
+          <td><input name="cc_no" type="text" value="${inquire.cc_no}" class="form-control" readonly/></td>
+        </tr>
+        <tr>
+          <td>제목</td>
+          <td><textarea name="cc_title" cols="40" rows="10" class="form-control" disabled>${inquire.cc_title}</textarea></td>
+        </tr>
+        <tr>
+          <td>글 내용</td>
+          <td><textarea name="cc_content" cols="40" rows="10" class="form-control" disabled>${inquire.cc_content}</textarea></td>
+        </tr>
+        <tr>
+          <td>작성일자</td>
+          <td>${inquire.cc_date}</td>
+        </tr>
+      </table>
+      
+      
+    
+    
+    </div>
+    </section>
+</body>
+</html>

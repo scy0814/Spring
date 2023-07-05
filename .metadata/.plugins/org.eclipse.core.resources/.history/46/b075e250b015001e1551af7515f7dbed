@@ -1,0 +1,23 @@
+package controller.transfer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.controller.Controller;
+
+public class AccountTransferProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String accountNum1 = request.getParameter("accountNum");
+		String accountNum2 = request.getParameter("accountNum2");
+		String t_amount = Integer.parseInt(request.getParameter("amount"));
+		String balance = request.getParameter("balance");
+		
+		int amount = Integer.parseInt(t_amount);
+		int currentBalance = Integer.parseInt(balance);
+		
+		String t_balance = t_amount + balance ;		
+		System.out.println(t_balance);
+		return "/index.jsp";
+	}
+}

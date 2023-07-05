@@ -1,0 +1,5 @@
+package biz.notice;
+
+public class NoticeVO {
+
+}

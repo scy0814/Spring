@@ -1,0 +1,44 @@
+package controller.reply;
+
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.customer.CenterDAO;
+import biz.customer.CenterVO;
+import biz.reply.ReplyDAO;
+import biz.reply.ReplyVO;
+import kr.ac.kopo.controller.Controller;
+
+public class ReplyController implements Controller {
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		try {
+            request.setCharacterEncoding("UTF-8");
+         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         };
+		
+		Timestamp cr_date = new Timestamp(new Date().getTime());
+		
+		String cc_no = request.getParameter("cc_no");
+		String id = request.getParameter("id");
+		String content = request.getParameter("content");
+		
+		ReplyVO vo = new ReplyVO();
+		vo.setCc_no(cc_no);
+		vo.setId(id);
+		vo.setCr_content(content);
+		vo.setCr_date(cr_date);
+		
+		ReplyDAO dao = new ReplyDAO();
+		dao.insertReply(vo);
+		
+		return "/jsp/reply/Reply.jsp";
+	}
+
+	
+}

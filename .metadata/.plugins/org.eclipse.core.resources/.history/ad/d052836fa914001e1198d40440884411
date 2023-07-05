@@ -1,0 +1,12 @@
+package biz.comment;
+
+import java.util.Date;
+
+public class CommentVO {
+	private String	nc_no; 
+	private String nc_id;
+	private String nc_comment;
+	private Date nc_date;
+	
+	
+}

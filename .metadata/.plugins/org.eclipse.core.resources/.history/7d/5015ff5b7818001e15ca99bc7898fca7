@@ -1,0 +1,27 @@
+package controller.customer;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.customer.CenterDAO;
+import biz.customer.CenterVO;
+import biz.user.UserVO;
+import kr.ac.kopo.controller.Controller;
+
+public class CustomerCenterController implements Controller{
+	
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		UserVO user = (UserVO)request.getSession().getAttribute("user");
+		CenterVO vo = new CenterVO();
+		vo.setId(user.getId());
+		CenterDAO dao = new CenterDAO();
+		List<CenterVO> inquireList = dao.getInquireListById(vo);
+		List<CenterVO> AdinquireList = dao.getInquireList(vo);
+		request.setAttribute("inquireList", inquireList);
+		
+		return "/jsp/customer/CustomerCenter.jsp";
+	}
+}

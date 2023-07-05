@@ -1,0 +1,50 @@
+package kr.ac.kopo.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DispatcherServlet extends HttpServlet {
+
+	// service������ ����ϱ� ������ ��������� ��ü�� �������
+	private HandlerMapping mappings;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		
+		String propLoc = config.getInitParameter("propLoc");
+		// init�޼ҵ�� ������ ������ �� ó�� ��û�� ���� �� �ѹ��� ����ȴ�
+		mappings = new HandlerMapping();
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Ŭ���̾�Ʈ�� ��û�� request�� ���ƿ´� Ŭ���̾�Ʈ�� ��û URI�� �޾ƿ��� �޼ҵ�
+		String uri = request.getRequestURI();
+		// request.getContextPath() <-- �Ź� URI�� ���ƿö� ���̺귯���� �����°� �������ϱ� ������
+		// ���̺귯���� �̾Ƴ��� ���� ����Ѵ� ��) /MyBank/login.do ���� /MyBank�� ����
+
+		// /MyBank/login.do ���� /login.do �տ����� ©��� �ϱ� ������ length�� ©����
+		uri = uri.substring(request.getContextPath().length());
+
+		Controller ctrl = mappings.getController(uri);
+		String callPage = ctrl.handleRequest(request, response);
+//      System.out.println("jsp : " + callPage);
+
+		if (callPage.startsWith("redirect:")) {
+
+			response.sendRedirect(request.contextPath() + callPage.substring("redirect:".length()));
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(callPage);
+			dispatcher.forward(request, response);
+		}
+	}
+
+}

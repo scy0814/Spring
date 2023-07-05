@@ -1,0 +1,23 @@
+package controller.notice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import biz.notice.NoticeDAO;
+import biz.notice.NoticeVO;
+import kr.ac.kopo.controller.Controller;
+
+public class GetNoticeController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String n_no = request.getParameter("n_no");
+		NoticeVO vo = new NoticeVO();
+		vo.setN_title(n_no);
+		
+		NoticeDAO dao = new NoticeDAO();
+		NoticeVO notice = dao.getNotice(vo);
+		
+		request.setAttribute("notice", notice);
+		return "/jsp/notice/GetNotice.jsp";
+	}
+}

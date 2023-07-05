@@ -1,0 +1,239 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+   pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<!-- Favicons -->
+<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+   rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/ezibanking/vendor/bootstrap/css/bootstrap.min.css"
+   rel="stylesheet">
+<link href="/ezibanking/vendor/bootstrap-icons/bootstrap-icons.css"
+   rel="stylesheet">
+<link href="/ezibanking/vendor/aos/aos.css" rel="stylesheet">
+<link href="/ezibanking/vendor/glightbox/css/glightbox.min.css"
+   rel="stylesheet">
+<link href="/ezibanking/vendor/swiper/swiper-bundle.min.css"
+   rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/ezibanking/css/main.css" rel="stylesheet">
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+   crossorigin="anonymous">
+<link rel="stylesheet" href="/ezibanking/css/login.css">
+
+<!-- login css  -->
+<link href="/ezibanking/css/login2.css" rel="stylesheet" />
+
+</head>
+<script>
+   function showConfirmation(contextPath) {
+      var accountPW = document.getElementById("user_password").value;
+      var accountPW2 = document.getElementById("user_password2").value;
+      var errorElement = document.getElementById("error");
+
+      if (accountPW.length < 4 || accountPW2.length < 4) {
+         errorElement.innerHTML = "계좌 비밀번호는 4자리 이상이어야 합니다.";
+         return false;
+      }
+
+      if (accountPW !== accountPW2) {
+         errorElement.innerHTML = "계좌 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+         document.getElementById("user_password2").className = "error";
+         return false;
+      } else {
+         errorElement.innerHTML = "";
+         document.getElementById("user_password2").className = "success";
+      }
+
+      alert("계좌가 성공적으로 개설되었습니다.");
+
+      // Form submission
+      var form = document.getElementById("createAccountForm");
+      form.action = contextPath + "/createAccountProcess.do";
+      form.submit();
+   }
+</script>
+<body>
+
+
+   <!-- ======= Header ======= -->
+   <header>
+      <jsp:include page="/jsp/include/topMenu.jsp" />
+   </header>
+   <!-- End Header -->
+
+   <main id="main">
+
+      <!-- ======= Start Breadcrumbs ======= -->
+
+      <div class="breadcrumbs">
+         <div class="page-header d-flex align-items-center">
+            <div class="container position-relative">
+               <div class="row d-flex justify-content-center">
+                  <div class="col-lg-6 text-center">
+                     <h2>상품 목록</h2>
+                     <p>ezi 은행의 상품목록입니다</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <nav>
+            <div class="container">
+               <ol>
+                  <li><a href="index.html">홈으로</a></li>
+                  <li>상품목록</li>
+               </ol>
+            </div>
+         </nav>
+      </div>
+      <!-- End Breadcrumbs -->
+
+
+
+
+
+      <!-- ======= Our Services Section ======= -->
+      <!-- ======= Pricing Section ======= -->
+      <section id="pricing" class="pricing sections-bg">
+         <div class="container" data-aos="fade-up">
+
+            <div id="container" class="vh-80">
+               <div class="container py-5 h-80">
+
+
+                  <form id="createAccountForm" class="createAccount" method="post">
+
+                     <div class="container" class="vh-80">
+
+                        <div class="col-lg-8">
+                           <h5 class="card-title">계좌 개설</h5>
+
+                           <div class="form-group">
+                              <label for="id">이 름</label> <input type="text" name="id"
+                                 value="${loginUser.user_name}" readonly="readonly" disabled
+                                 class="form-control">
+                           </div>
+
+                           <div id="inputBox">
+
+                              <div class="form-outline mb-4">
+                                 <label for="accountType">상품 선택</label>
+                                    <select name="item_name" class="form-control form-control-lg">
+                                 <c:forEach items="${itemList}" var="item">
+                                       <option value="${item.item_name}">${item.item_name}</option>
+                                       <!-- <option value="적금">적금</option>
+                                       <option value="예금">예금</option> -->
+                                 </c:forEach>
+                                    </select>
+                              </div>
+
+
+                              <div class="form-outline mb-4">
+                                 <input type="password" name="user_password" id="user_password"
+                                    class="form-control form-control-lg" /> <label
+                                    class="form-label" for="form1Example23"> 계좌비밀번호</label>
+                              </div>
+
+                              <div class="form-outline mb-4">
+                                 <input type="password" name="user_password2" id="user_password2"
+                                    class="form-control form-control-lg" /> <label
+                                    class="form-label" for="form1Example13">계좌비밀번호 확인</label>
+                              </div>
+
+                              <div class="form-outline mb-4">
+                                 <input type="text" name="acc_nickname"
+                                    class="form-control form-control-lg" /> <label
+                                    class="form-label" for="form1Example13">계좌별칭</label>
+                              </div>
+
+
+                           </div>
+                           <div id="error"></div>
+                           <button type="button"
+                              onclick="showConfirmation('${pageContext.request.contextPath}')"
+                              class="btn btn-primary">계좌 개설하기</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+
+
+
+
+
+
+
+         </div>
+      </section>
+      <!-- End Pricing Section -->
+
+
+
+
+      <script data-cfasync="false"
+         src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+      <script defer
+         src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+         integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+         data-cf-beacon='{"rayId":"7dccce4a8a55262f","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.4.0","si":100}'
+         crossorigin="anonymous"></script>
+
+
+
+
+
+
+      <!-- ======= Footer ======= -->
+      <footer id="footer" class="footer">
+         <jsp:include page="/jsp/include/footer.jsp" />
+      </footer>
+
+      <a href="#"
+         class="scroll-top d-flex align-items-center justify-content-center"><i
+         class="bi bi-arrow-up-short"></i></a>
+
+      <div id="preloader"></div>
+
+      <!-- Vendor JS Files -->
+      <script src="/ezibanking/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/ezibanking/vendor/aos/aos.js"></script>
+      <script src="/ezibanking/vendor/glightbox/js/glightbox.min.js"></script>
+      <script src="/ezibanking/vendor/purecounter/purecounter_vanilla.js"></script>
+      <script src="/ezibanking/vendor/swiper/swiper-bundle.min.js"></script>
+      <script src="/ezibanking/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+      <script src="/ezibanking/vendor/php-email-form/validate.js"></script>
+
+      <!-- Template Main JS File -->
+      <script src="/ezibanking/js/main.js"></script>
+      <!-- MDB -->
+      <script type="text/javascript"
+         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+
+
+
+
+
+   </main>
+</body>
+</html>

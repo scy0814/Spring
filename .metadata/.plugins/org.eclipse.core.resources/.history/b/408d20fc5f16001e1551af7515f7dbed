@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.button {
+    width: 5cm;
+    height: 60px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: lightgray;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0;
+  }
+  #button2{
+  background-color: rgb(44, 62, 80);
+    color: white;
+  }
+  .myHr {
+    width: 5cm;
+    margin-left: 0;
+  }
+</style>
+</head>
+<header>
+<jsp:include page="/jsp/include/header.jsp" />
+</header>
+<body>
+	<h1 class="MyAccount">입출금 내역조회</h1>
+	<hr class="myHr" />
+	
+	<form action="${pageContext.request.contextPath}/createAccount.do" method="post">
+    <button type="submit" class="button" id="button1">계좌개설</button>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/transactionHistory.do" method="post">
+    <button type="submit" class="button" id="button2">입출금 내역조회</button><br>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/openBanking.do" method="post">
+    <button type="submit" class="button">오픈뱅킹</button><br>
+  </form>
+
+  <form action="${pageContext.request.contextPath}/closeAccount.do" method="post">
+    <button type="submit" class="button">계좌해지</button>
+  </form>
+</body>
+</html>

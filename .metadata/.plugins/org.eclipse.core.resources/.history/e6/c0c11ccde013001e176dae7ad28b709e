@@ -1,0 +1,14 @@
+/logout.do=kr.ac.kopo.controller.LogoutController
+/login.do=kr.ac.kopo.controller.LoginController
+/loginProcess.do=kr.ac.kopo.controller.LoginProcessController
+/notice.do=controller.notice.NoticeController
+/kakaoLogin.do=kr.ac.kopo.controller.KakaoLoginController
+/account.do=controller.account.AccountController
+/createAccount.do=controller.account.CreateAccountController
+/createAccountProcess.do=controller.account.CreateAccountProcessController
+/closeAccount.do=controller.account.CloseAccountController
+/closeAccountProcess.do=controller.account.CloseAccountProcessController
+/transactionHistory.do=controller.transaction.TransactionHistoryController
+/transaction.do=controller.transaction.TransactionController
+/myPage.do=controller.myPage.MyPageController
+/updateInfo.do=controller.myPage.UpdateInfoController

@@ -1,0 +1,21 @@
+package controller.notice;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.controller.Controller;
+
+public class InsertNoticeProcessController implements Controller{
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		String n_title = request.getParameter("n_title");
+		String n_content = request.getParameter("n_title");
+		Timestamp n_date = new Timestamp(new Date().getTime());
+		
+		
+		return "/jsp/notice/Notice.jsp";
+	}
+}

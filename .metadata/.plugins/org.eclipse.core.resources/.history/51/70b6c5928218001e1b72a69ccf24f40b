@@ -1,0 +1,101 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .login-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .kakao-login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffeb00;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .kakao-login-btn:hover {
+            background-color: #ffd600;
+        }
+    </style>
+</head>
+<body>
+    <%@include file="/jsp/include/header.jsp"%>
+
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <ol>
+                <li><a href="/index.jsp">홈</a></li>
+                <li>로그인</li>
+            </ol>
+            <h2 style="font-size: 35px;">로그인</h2>
+        </div>
+    </section>
+
+    <section class="inner-page">
+        <div class="container">
+            <div class="login-wrapper">
+                <h1>로그인</h1>
+                <form method="post" action="${pageContext.request.contextPath }/loginProcess.do" id="login-form">
+                    <input type="text" name="id" placeholder="아이디">
+                    <input type="password" name="password" placeholder="비밀번호">
+                    <input type="submit" value="로그인">
+                </form>
+                <form method="post" action="${pageContext.request.contextPath }/kakaoLogin.do">
+                    <input type="submit" class="kakao-login-btn" value="카카오로 로그인">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
